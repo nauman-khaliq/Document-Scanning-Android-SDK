@@ -2,4 +2,4 @@ jdk:
   - openjdk11
 
 install:
-  - ./gradlew :DocumentScanner:assembleRelease
+  - ./gradlew clean build publishToMavenLocal
