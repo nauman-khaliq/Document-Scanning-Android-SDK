@@ -107,19 +107,8 @@ afterEvaluate {
                 groupId = libraryGroup
                 artifactId = libraryArtifact
                 version = libraryVersionName
-
-                // Exclude local module dependencies from POM
-                pom.withXml {
-                    def dependenciesNode = asNode().dependencies
-                    if (dependenciesNode != null) {
-                        dependenciesNode.dependency.findAll {
-                            it.groupId.text() == 'com.zynkware' && it.artifactId.text() == 'openCV440'
-                        }.each { dep ->
-                            dependenciesNode.remove(dep)
-                        }
-                    }
-                }
             }
         }
     }
 }
+

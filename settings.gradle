@@ -1,7 +1,5 @@
 include ':app'
 include ':DocumentScanner'
-include ':Tiny-OpenCV'
 include ':openCV440'
 
-project(':Tiny-OpenCV').projectDir = new File(rootDir, 'Tiny-OpenCV')
 project(':openCV440').projectDir = new File(rootDir, 'Tiny-OpenCV/openCV440')
