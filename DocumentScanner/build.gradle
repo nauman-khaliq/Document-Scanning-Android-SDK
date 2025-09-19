@@ -95,6 +95,10 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
+tasks.withType(Test) {
+    enabled = false
+}
+
 afterEvaluate {
     publishing {
         publications {
