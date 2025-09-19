@@ -1,3 +1,6 @@
 include ':DocumentScanner'
 include ':app'
 rootProject.name = "DocumentScannerSample"
+
+include ':app', ':Tiny-OpenCV'
+project(':Tiny-OpenCV').projectDir = new File(rootDir, 'Tiny-OpenCV')
