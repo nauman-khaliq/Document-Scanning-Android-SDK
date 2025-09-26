@@ -16,9 +16,6 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
 
-        versionCode libraryVersionCode
-        versionName openCVersionName
-
         externalNativeBuild {
             cmake {
                 arguments "-DANDROID_STL=c++_shared"
