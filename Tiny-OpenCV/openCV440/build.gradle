@@ -1,10 +1,5 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'maven-publish'
-
-group="com.zynkware"
-
-def openCVersionName = "4.4.0"
-def libraryVersionCode = 3
+apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
@@ -14,12 +9,12 @@ repositories {
 }
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 33
+    packageBuildConfig false
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 33
 
         versionCode libraryVersionCode
         versionName openCVersionName
