@@ -9,11 +9,11 @@ repositories {
 
 android {
     namespace "org.opencv"   // ✅ important for Android Gradle Plugin 7+
-    compileSdkVersion 33     // keep same as main library
+    compileSdkVersion 29     // keep same as main library
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 29
 
         externalNativeBuild {
             cmake {
