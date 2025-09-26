@@ -53,6 +53,10 @@ android {
         main.res.srcDirs = ['src/main/res']
         main.manifest.srcFile 'src/main/AndroidManifest.xml'
     }
+
+    packagingOptions {
+        pickFirst "**/*.so"   // ensure OpenCV .so files are included once
+    }
 }
 
 repositories {
@@ -93,10 +97,6 @@ task sourceJar(type: Jar) {
 task androidSourcesJar(type: Jar) {
     archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
-}
-
-packagingOptions {
-    pickFirst "**/*.so"   // ensure OpenCV .so files are included once
 }
 
 tasks.withType(Test) {
