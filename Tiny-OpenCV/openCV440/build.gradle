@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 
 repositories {
-    google()
     mavenCentral()
+    google()
     jcenter()
     maven { url "https://jitpack.io" }
 }
 
 android {
-    namespace "org.opencv"   // ✅ important for Android Gradle Plugin 7+
-    compileSdkVersion 29     // keep same as main library
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 21
@@ -26,36 +25,38 @@ android {
     buildTypes {
         debug {
             packagingOptions {
-                doNotStrip '**/*.so'  // keep symbols, OpenCV handles stripping
+                doNotStrip '**/*.so'  // controlled by OpenCV CMake scripts
             }
         }
         release {
             packagingOptions {
-                doNotStrip '**/*.so'
+                doNotStrip '**/*.so'  // controlled by OpenCV CMake scripts
             }
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-                    'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 
     sourceSets {
-        main {
-            java.srcDirs += 'src/main/java'
-            jniLibs.srcDirs = ['src/main/jniLibs']  // OpenCV .so files
-            res.srcDirs = ['src/main/res']
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-        }
+        main.java.srcDirs += 'src/main/java'
+        main.jniLibs.srcDirs = ['src/main/jniLibs']
+        main.res.srcDirs = ['src/main/res']
+        main.manifest.srcFile 'src/main/AndroidManifest.xml'
     }
 
     externalNativeBuild {
         cmake {
-            path "${project.projectDir}/libcxx_helper/CMakeLists.txt"
+            path (project.projectDir.toString() + '/libcxx_helper/CMakeLists.txt')
         }
     }
 }
 
-// Optional: produce sources.jar (useful if you want to publish OpenCV separately later)
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    from fileTree(dir: 'src/libs', include: ['*.jar'])
+    classifier "sources"
+}
+
 task androidSourcesJar(type: Jar) {
     archiveClassifier.set('sources')
     from android.sourceSets.main.java.srcDirs
